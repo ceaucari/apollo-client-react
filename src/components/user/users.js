@@ -31,27 +31,43 @@ const Users = () => {
 
   return (
     <MainLayout>
-      {users?.map(user => (
-        <>
-          <div key={user.id}>
-            <div>{user.id}</div>
-            <div>{user.username}</div>
-            <div>{user.email}</div>
-            <div>{user.role || 'USER'}</div>
-            {/* <span>{`${new Date(user.createdAt).toLocaleString()}`}</span> */}
-            <div>
-              {user.messages.map(message => (
-                <div key={message.id}>
-                  <div>{message.id}</div>
-                  <div>{`${new Date(message.createdAt).toLocaleString()}`}</div>
-                  <div>{message.text}</div>
-                </div>
-              ))}{' '}
-            </div>
-          </div>
-          <hr />
-        </>
-      ))}
+      <table className="table">
+        <thead>
+          <tr>
+            <th>-</th>
+            <th>ID</th>
+            <th>username</th>
+            <th>email</th>
+            <th>role</th>
+            <th>messages</th>
+            <th>action</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users?.map((user, idx) => (
+            <tr key={user.id}>
+              <td>{idx + 1}</td>
+              <td>{user.id}</td>
+              <td>{user.username}</td>
+              <td>{user.email}</td>
+              <td>{user.role || 'USER'}</td>
+              {/* <span>{`${new Date(user.createdAt).toLocaleString()}`}</span> */}
+              {/* <td>
+                {user.messages.map(message => (
+                  <div key={message.id}>
+                    <div>{message.id}</div>
+                    <div>{`${new Date(
+                      message.createdAt
+                    ).toLocaleString()}`}</div>
+                    <div>{message.text}</div>
+                  </div>
+                ))}{' '}
+              </td> */}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </MainLayout>
   );
 };
