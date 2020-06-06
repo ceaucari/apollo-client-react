@@ -4,10 +4,10 @@ import NavLink from './navLink';
 const MainMenu = () => {
   return (
     <>
-      <NavLink class="navbar-item" to="/">
+      <NavLink className="navbar-item" to="/">
         Home
       </NavLink>
-      <NavLink class="navbar-item" to="/messages">
+      <NavLink className="navbar-item" to="/messages">
         Messages
       </NavLink>
     </>

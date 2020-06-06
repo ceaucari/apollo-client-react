@@ -36,13 +36,15 @@ const UserMenu = () => {
     return <NavLink to="/login">Login</NavLink>;
   }
   return (
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link has-text-grey-light is-arrowless">{me.username}</a>
-      <div class="navbar-dropdown">
-        <Link to="/user" class="navbar-item has-text-dark is-arrowless">
+    <div className="navbar-item has-dropdown is-hoverable">
+      <a className="navbar-link has-text-grey-light is-arrowless">
+        {me.username}
+      </a>
+      <div className="navbar-dropdown">
+        <Link to="/user" className="navbar-item has-text-dark is-arrowless">
           Profile
         </Link>
-        <Link to={reload} onClick={logout} class="navbar-item">
+        <Link to={reload} onClick={logout} className="navbar-item">
           Logout
         </Link>
       </div>

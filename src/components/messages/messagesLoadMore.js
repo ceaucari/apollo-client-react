@@ -1,9 +1,9 @@
 import React from 'react';
 
 const LoadMore = ({ limit, pageInfo, fetchMore }) => (
-  <div class="is-2 is-offset-5 column">
+  <div className="is-2 is-offset-5 column">
     <button
-      class="button is-fullwidth is-link"
+      className="button is-fullwidth is-link"
       onClick={() =>
         fetchMore({
           variables: {

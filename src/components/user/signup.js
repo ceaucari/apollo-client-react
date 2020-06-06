@@ -65,12 +65,12 @@ const Signup = () => {
 
   return (
     <MainLayout>
-      <div class="level column is-4 is-offset-4">
+      <div className="level column is-4 is-offset-4">
         <form onSubmit={handleSubmit}>
-          <div class="field">
-            <label class="label">Name</label>
+          <div className="field">
+            <label className="label">Name</label>
             <input
-              class="input"
+              className="input"
               type="text"
               placeholder="Username"
               name="name"
@@ -79,10 +79,10 @@ const Signup = () => {
               required
             />
           </div>
-          <div class="field">
-            <label class="label">Email</label>
+          <div className="field">
+            <label className="label">Email</label>
             <input
-              class="input"
+              className="input"
               type="email"
               placeholder="Email"
               name="email"
@@ -91,10 +91,10 @@ const Signup = () => {
               required
             />
           </div>
-          <div class="field">
-            <label class="label">Password</label>
+          <div className="field">
+            <label className="label">Password</label>
             <input
-              class="input"
+              className="input"
               type="password"
               placeholder="Password"
               name="password"
@@ -104,10 +104,10 @@ const Signup = () => {
             />
           </div>
           {error && <Error error={error} />}
-          <button class="button is-link is-fullwidth" type="submit">
+          <button className="button is-link is-fullwidth" type="submit">
             Sign up
           </button>
-          <div class="has-text-centered column">
+          <div className="has-text-centered column">
             <span>Already have an account? </span>
             <Link to="/login">Login</Link>
           </div>

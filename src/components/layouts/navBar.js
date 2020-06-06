@@ -1,26 +1,26 @@
 import React from 'react';
 import logo from './../../assets/logo.svg';
-import MainMenu from '../nav/mainMenu';
-import UserMenu from '../nav/userMenu';
-import AdminMenu from '../nav/adminMenu';
+import MainMenu from '../menu/mainMenu';
+import UserMenu from '../menu/userMenu';
+import AdminMenu from '../menu/adminMenu';
 
-const TopNav = () => {
+const NavBar = () => {
   return (
     <nav
-      class="navbar has-background-link"
+      className="navbar has-background-link"
       role="navigation"
-      ariaLabel="main navigation"
+      aria-label="main navigation"
     >
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img class="logo" src={logo} alt="logo" />
+      <div className="container">
+        <div className="navbar-brand">
+          <a className="navbar-item" href="/">
+            <img className="logo" src={logo} alt="logo" />
           </a>
 
           <a
             href="/"
             role="button"
-            class="navbar-burger burger"
+            className="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarTarget"
@@ -31,12 +31,12 @@ const TopNav = () => {
           </a>
         </div>
 
-        <div id="navbarTarget" class="navbar-menu">
-          <div class="navbar-start">
+        <div id="navbarTarget" className="navbar-menu">
+          <div className="navbar-start">
             <MainMenu />
           </div>
 
-          <div class="navbar-end">
+          <div className="navbar-end">
             <UserMenu />
             <AdminMenu />
           </div>
@@ -46,4 +46,4 @@ const TopNav = () => {
   );
 };
 
-export default TopNav;
+export default NavBar;

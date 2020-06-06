@@ -1,14 +1,16 @@
-TODO:
-create a real README
-Admin routes
-Style Users page
-Style Profile page
-User fields
-upload image
-Update users
-Delete user
-Delete message
-Tests
-Make navbar responsive
-
-Store subscription in cache to make it persistent if you navigate back to the page
+### TODO:
+- create a real README
+- write documentation
+- Admin routes
+- Add actions to Users page for admins
+- Style Profile page
+- User fields
+- upload image
+- Update users
+- Delete user
+- Delete message
+- Tests
+- Make navbar responsive
+- Store subscription in cache to make it persistent if you navigate back to the page
+- add email recovery
+- add email notification on new account created

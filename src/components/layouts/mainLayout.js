@@ -4,7 +4,7 @@ import NavBar from './navBar';
 const MainLayout = props => (
   <div className="app">
     <NavBar />
-    <section class="section">
+    <section className="section">
       <div className="container">{props.children}</div>
     </section>
   </div>

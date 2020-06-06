@@ -53,11 +53,11 @@ const MessageForm = () => {
     return null;
   }
   return (
-    <div class="level column is-6 is-offset-3">
+    <div className="level column is-6 is-offset-3">
       <form onSubmit={handleSubmit}>
-        <div class="field">
+        <div className="field">
           <textarea
-            class="textarea"
+            className="textarea"
             placeholder="Type your message here"
             rows="3"
             name="message"
@@ -67,7 +67,7 @@ const MessageForm = () => {
           />
         </div>
         {error && <Error error={error} />}
-        <button class="button is-link is-fullwidth" type="submit">
+        <button className="button is-link is-fullwidth" type="submit">
           Send Message
         </button>
       </form>

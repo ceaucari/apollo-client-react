@@ -7,6 +7,7 @@ import Login from './components/user/login';
 import Home from './components/pages/home';
 import Signup from './components/user/signup';
 import Users from './components/user/users';
+import UserForm from './components/user/userForm';
 
 const NotFound = () => (
   <MainLayout>
@@ -22,7 +23,8 @@ const Routes = () => {
       <Messages path="/messages" />
       <Login path="/login" />
       <Signup path="/register" />
-      <Profile path="/user" />
+      <Profile path="/user/" />
+      <UserForm path="/user/edit" />
       <Users path="/admin/users" />
     </Router>
   );

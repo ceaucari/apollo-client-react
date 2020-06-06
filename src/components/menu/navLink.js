@@ -9,7 +9,7 @@ const NavLink = props => (
       // anchor element's props
       return {
         // style: isCurrent ? 'color: red' : 'color: blue',
-        class: isCurrent
+        className: isCurrent
           ? 'navbar-item has-text-dark is-active'
           : 'navbar-item has-text-white',
       };

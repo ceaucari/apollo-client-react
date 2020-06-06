@@ -29,8 +29,11 @@ const AdminMenu = () => {
   }
   return (
     <>
-      <NavLink class="navbar-item" to="/admin/users">
+      <NavLink className="navbar-item" to="/admin/users">
         Users
+      </NavLink>
+      <NavLink className="navbar-item" to="/user/edit">
+        Edit User
       </NavLink>
     </>
   );
