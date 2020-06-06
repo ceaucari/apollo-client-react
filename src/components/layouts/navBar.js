@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './../../assets/logo.svg';
 import MainMenu from '../nav/mainMenu';
 import UserMenu from '../nav/userMenu';
+import AdminMenu from '../nav/adminMenu';
 
 const TopNav = () => {
   return (
@@ -37,6 +38,7 @@ const TopNav = () => {
 
           <div class="navbar-end">
             <UserMenu />
+            <AdminMenu />
           </div>
         </div>
       </div>

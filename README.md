@@ -1,9 +1,8 @@
 TODO:
-Style form errors
 create a real README
 Admin routes
-Users page
-Profile page
+Style Users page
+Style Profile page
 User fields
 upload image
 Update users

@@ -6,6 +6,7 @@ import Profile from './components/user/profile';
 import Login from './components/user/login';
 import Home from './components/pages/home';
 import Signup from './components/user/signup';
+import Users from './components/user/users';
 
 const NotFound = () => (
   <MainLayout>
@@ -22,6 +23,7 @@ const Routes = () => {
       <Login path="/login" />
       <Signup path="/register" />
       <Profile path="/user" />
+      <Users path="/admin/users" />
     </Router>
   );
 };
