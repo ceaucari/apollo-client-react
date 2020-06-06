@@ -38,11 +38,22 @@ const Messages = ({ limit = LIMIT }) => {
     }
   );
 
-  if (!data || loading) {
-    return <Loading />;
+  if (error) {
+    return (
+      <MainLayout>
+        <Error error={error} />
+      </MainLayout>
+    );
   }
 
-  if (error) return <Error error={error} />;
+  if (!data || loading) {
+    return (
+      <MainLayout>
+        <MessageForm />
+        <Loading />
+      </MainLayout>
+    );
+  }
 
   const {
     messages: { edges, pageInfo },

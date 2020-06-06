@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { gql } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
-import { form } from '../../styles';
 import Error from '../utils/error';
 
 const CREATE_MESSAGE = gql`
@@ -25,13 +24,13 @@ const MessageForm = () => {
   const [input, setInput] = useState('');
 
   const mutationUpdate = (cache, { data }) => {
-    console.log('UPDATED data:', data);
-    console.log('UPDATED cache:', cache);
+    // console.log('UPDATED data:', data);
+    // console.log('UPDATED cache:', cache);
   };
 
   const mutationComplete = data => {
     setInput('');
-    console.log('COMPLETED data:', data);
+    // console.log('COMPLETED data:', data);
   };
 
   const [createMessage, { error }] = useMutation(CREATE_MESSAGE, {
@@ -43,21 +42,23 @@ const MessageForm = () => {
     if (event) {
       event.preventDefault();
       createMessage({ variables: { text: input } }).catch(err =>
-        console.log('UNHANDLED ERR', err)
+        console.log(err)
       );
     }
   };
+
+  console.log('isLoggedIn:', data.isLoggedIn);
 
   if (!data.isLoggedIn) {
     return null;
   }
   return (
-    <div style={form.container}>
+    <div class="level column is-6 is-offset-3">
       <form onSubmit={handleSubmit}>
-        <div style={form.field}>
-          <label style={form.label}>Message</label>
+        <div class="field">
           <textarea
-            style={form.input}
+            class="textarea"
+            placeholder="Type your message here"
             rows="3"
             name="message"
             onChange={e => setInput(e.target.value)}
@@ -66,11 +67,9 @@ const MessageForm = () => {
           />
         </div>
         {error && <Error error={error} />}
-        <div>
-          <button style={form.button} type="submit">
-            Send Message
-          </button>
-        </div>
+        <button class="button is-link is-fullwidth" type="submit">
+          Send Message
+        </button>
       </form>
     </div>
   );

@@ -4,16 +4,26 @@ import gql from 'graphql-tag';
 import { Link } from '@reach/router';
 
 import NavLink from './navLink';
-import { nav } from '../../styles';
+import Loading from '../utils/loading';
+import Error from '../utils/error';
 
-const IS_LOGGED_IN = gql`
-  query IsUserLoggedIn {
-    isLoggedIn @client
+const GET_ME = gql`
+  query {
+    me {
+      id
+      username
+      email
+    }
   }
 `;
 
 const UserMenu = () => {
-  const { data } = useQuery(IS_LOGGED_IN);
+  const { data, loading, error } = useQuery(GET_ME);
+  const me = data?.me;
+
+  if (loading) return <Loading />;
+  if (error) return <Error error={error} />;
+  if (!data) return <p>Not found</p>;
 
   const reload = window.location.pathname;
 
@@ -22,17 +32,21 @@ const UserMenu = () => {
     reload();
   };
 
-  if (data.isLoggedIn) {
-    return (
-      <Link to={reload} onClick={logout} style={nav.mainNavLink}>
-        Logout
-      </Link>
-    );
+  if (!me) {
+    return <NavLink to="/login">Login</NavLink>;
   }
   return (
-    <>
-      <NavLink to="/login">Login</NavLink>
-    </>
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link has-text-grey-light is-arrowless">{me.username}</a>
+      <div class="navbar-dropdown">
+        <Link to="/user" class="navbar-item has-text-dark is-arrowless">
+          Profile
+        </Link>
+        <Link to={reload} onClick={logout} class="navbar-item">
+          Logout
+        </Link>
+      </div>
+    </div>
   );
 };
 

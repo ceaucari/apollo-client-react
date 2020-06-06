@@ -12,7 +12,11 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { onError } from 'apollo-link-error';
 
 import Routes from './Routes';
+import 'bulma/css/bulma.css';
 import './styles/styles.css';
+// Error trying to customize bulma
+// https://github.com/jgthms/bulma/issues/2797
+// import './styles/styles.scss';
 
 const httpLink = new HttpLink({
   uri: `http://${process.env.REACT_APP_API_URL}`,

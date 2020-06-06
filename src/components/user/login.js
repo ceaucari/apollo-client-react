@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { gql } from '@apollo/client';
 import { useMutation } from '@apollo/react-hooks';
 
-import { form } from '../../styles';
 import Error from '../utils/error';
 import MainLayout from '../layouts/mainLayout';
 import { Link } from '@reach/router';
@@ -64,24 +63,26 @@ const Login = () => {
 
   return (
     <MainLayout>
-      <div style={form.container}>
+      <div class="level column is-4 is-offset-4">
         <form onSubmit={handleSubmit}>
-          <div style={form.field}>
-            <label style={form.label}>Login</label>
+          <div class="field">
+            <label class="label">Login</label>
             <input
-              style={form.input}
+              class="input"
               type="text"
+              placeholder="Email or username"
               name="login"
               onChange={handleInputChange}
               value={inputs.login}
               required
             />
           </div>
-          <div style={form.field}>
-            <label style={form.label}>Password</label>
+          <div class="field">
+            <label class="label">Password</label>
             <input
-              style={form.input}
+              class="input"
               type="password"
+              placeholder="Password"
               name="password"
               onChange={handleInputChange}
               value={inputs.password}
@@ -89,16 +90,12 @@ const Login = () => {
             />
           </div>
           {error && <Error error={error} />}
-          <div>
-            <button style={form.button} type="submit">
-              Login
-            </button>
-          </div>
-          <div style={form.linkWrapper}>
-            Not registered?
-            <Link to="/register" style={form.link}>
-              Create an account
-            </Link>
+          <button class="button is-link is-fullwidth" type="submit">
+            Login
+          </button>
+          <div class="has-text-centered column">
+            <span>Not registered? </span>
+            <Link to="/register">Create an account</Link>
           </div>
         </form>
       </div>

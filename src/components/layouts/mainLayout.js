@@ -1,13 +1,13 @@
 import React from 'react';
-import TopNav from './topNav';
+import NavBar from './navBar';
 
-const MainLayout = props => {
-  return (
-    <div className="App">
-      <TopNav />
-      {props.children}
-    </div>
-  );
-};
+const MainLayout = props => (
+  <div className="app">
+    <NavBar />
+    <section class="section">
+      <div className="container">{props.children}</div>
+    </section>
+  </div>
+);
 
 export default MainLayout;

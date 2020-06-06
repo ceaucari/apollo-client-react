@@ -1,14 +1,13 @@
 import React from 'react';
 import NavLink from './navLink';
-// import { Link } from '@reach/router';
 
 const MainMenu = () => {
   return (
     <>
-      <NavLink className="main-nav-link" to="/">
+      <NavLink class="navbar-item" to="/">
         Home
       </NavLink>
-      <NavLink className="main-nav-link" to="/messages">
+      <NavLink class="navbar-item" to="/messages">
         Messages
       </NavLink>
     </>

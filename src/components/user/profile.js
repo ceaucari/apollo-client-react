@@ -1,20 +1,15 @@
 import React from 'react';
-import { useQuery, useSubscription } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import Loading from '../utils/loading';
 import Error from '../utils/error';
+import MainLayout from '../layouts/mainLayout';
 
 const s = {
   wrapper: {
     textAlign: 'left',
   },
 };
-
-const IS_LOGGED_IN = gql`
-  query IsUserLoggedIn {
-    isLoggedIn @client
-  }
-`;
 
 const GET_ME = gql`
   query {
@@ -26,29 +21,16 @@ const GET_ME = gql`
   }
 `;
 
-// export const isLoggedIn = bool => {
-//   return bool;
-// };
-
 const Profile = () => {
   const { data, loading, error } = useQuery(GET_ME);
   const me = data?.me;
-
-  // // const setLoggedIn = () => {
-  // if (data?.me) {
-  //   isLoggedIn(true);
-  //   // return true;
-  // }
-  // isLoggedIn(false);
-  // // return false;
-  // // };
 
   if (loading) return <Loading />;
   if (error) return <Error error={error} />;
   if (!data) return <p>Not found</p>;
 
   return (
-    <>
+    <MainLayout>
       {me ? (
         <div style={s.wrapper}>
           <div>Id: {me.id}</div>
@@ -58,7 +40,7 @@ const Profile = () => {
       ) : (
         <div>Unauthenticated</div>
       )}
-    </>
+    </MainLayout>
   );
 };
 
