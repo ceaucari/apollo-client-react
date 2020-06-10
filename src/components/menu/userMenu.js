@@ -27,9 +27,18 @@ const UserMenu = () => {
 
   const reload = window.location.pathname;
 
+  const hello = () => {
+    // return 'Hello stranger';
+    return console.log('Hello stranger 👋🏼');
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     reload();
+  };
+  const help = () => {
+    console.log("Help is on it's way 🧑‍💻");
+    // alert("Help is on it's way");
   };
 
   if (!me) {
@@ -43,6 +52,12 @@ const UserMenu = () => {
       <div className="navbar-dropdown">
         <Link to="/user" className="navbar-item has-text-dark is-arrowless">
           Profile
+        </Link>
+        <Link to={reload} onClick={hello} className="navbar-item">
+          Hello
+        </Link>
+        <Link to={reload} onClick={help} className="navbar-item">
+          Help
         </Link>
         <Link to={reload} onClick={logout} className="navbar-item">
           Logout

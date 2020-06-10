@@ -10,6 +10,9 @@ const MainMenu = () => {
       <NavLink className="navbar-item" to="/messages">
         Messages
       </NavLink>
+      <NavLink className="navbar-item" to="/map">
+        Map
+      </NavLink>
     </>
   );
 };

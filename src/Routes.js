@@ -8,6 +8,8 @@ import Home from './components/pages/home';
 import Signup from './components/user/signup';
 import Users from './components/user/users';
 import UserForm from './components/user/userForm';
+import Map from './components/pages/map';
+// import { StaticMap } from './components/map/StaticMap';
 
 const NotFound = () => (
   <MainLayout>
@@ -26,6 +28,8 @@ const Routes = () => {
       <Profile path="/user/" />
       <UserForm path="/user/edit" />
       <Users path="/admin/users" />
+      <Map path="/map" />
+      {/* <StaticMap path="/map" /> */}
     </Router>
   );
 };
