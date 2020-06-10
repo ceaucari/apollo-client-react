@@ -10,7 +10,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import { ApolloLink, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { onError } from 'apollo-link-error';
-import { createUploadLink } from 'apollo-upload-client';
+// import { createUploadLink } from 'apollo-upload-client';
 
 import Routes from './Routes';
 import 'bulma/css/bulma.css';
@@ -30,9 +30,9 @@ const wsLink = new WebSocketLink({
   },
 });
 
-const uploadLink = createUploadLink({
-  uri: `http://${process.env.REACT_APP_API_URL}`,
-});
+// const uploadLink = createUploadLink({
+//   uri: `http://${process.env.REACT_APP_API_URL}`,
+// });
 
 const terminateLink = split(
   ({ query }) => {

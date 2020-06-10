@@ -2,7 +2,7 @@ import React from 'react';
 import MainLayout from '../layouts/mainLayout';
 import Subscription from '../messages/messagesSubscription';
 
-const Home = () => {
+const HomePage = () => {
   return (
     <MainLayout>
       <h1>Home</h1>
@@ -11,4 +11,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
