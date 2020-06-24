@@ -1,0 +1,171 @@
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap'); */
+:root {
+  --height: calc(100vh - 52px);
+  --header-height: 40px;
+  --body-bg: #e8e8e8;
+  --primary: #2e4ead;
+  --secondary: #92a6e2;
+  --secondary-hover: #cbcccd;
+}
+
+ul {
+  list-style: none;
+}
+
+.main {
+  display: flex;
+  /* margin: 0 20px; */
+  /* justify-content: center; */
+  /* background-color: burlywood; */
+}
+
+.section-center {
+  /* padding: 15px; */
+  /* transition: all 0.2s ease-in-out; */
+  /* height: calc(100vh - 52px); */
+  /* overflow: auto; */
+}
+
+.main-content {
+  /* background: green; */
+}
+
+/* ____________________________TOP NAVBAR_____________________________ */
+
+.top-navbar {
+  display: flex;
+  height: var(--header-height);
+  justify-content: space-between;
+  /* background-color: yellowgreen; */
+}
+
+.top-navbar .top-menu {
+  display: flex;
+  align-items: center;
+  color: var(--primary);
+}
+
+.top-navbar .top-menu .logo {
+  color: var(--primary);
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.top-navbar .top-menu ul {
+  display: flex;
+}
+
+.top-navbar .top-menu ul li a {
+  display: block;
+  margin-left: 20px;
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--primary);
+  line-height: 35px;
+  text-align: center;
+  color: var(--primary);
+  transition: all 0.2s ease-in-out;
+}
+
+.top-navbar .top-menu ul li a:hover {
+  background: var(--secondary-hover);
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+/* ____________________________SIDEBAR_____________________________ */
+
+.sidebar {
+  height: var(--height);
+  width: 220px;
+  transition: all 0.2s ease-in-out;
+  background: var(--body-bg);
+}
+
+.sidebar ul li a {
+  display: block;
+  position: relative;
+  margin-bottom: 1px;
+  color: var(--secondary);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  padding: 0 0.5em;
+}
+
+.sidebar ul li a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+}
+
+.sidebar ul li a:hover:before,
+.sidebar ul li a:active:before {
+  background: var(--secondary);
+}
+
+.sidebar ul li a span.icon {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.sidebar ul li a span {
+  font-size: 1.5em;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a:active {
+  background: var(--secondary-hover);
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar.closed {
+  width: 0;
+}
+
+.sidebar.closed ul li a span.icon {
+  margin: 0;
+}
+
+.sidebar.closed ul li a span {
+  display: none;
+}
+
+.sidebar .header {
+  height: var(--header-height);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.header .toggle i {
+  font-size: 32px;
+  text-align: center;
+  /* padding: 0 4px 8px 0; */
+  /* width: 100%; */
+  /* color: var(--secondary); */
+  /* background: var(--body-bg); */
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  /* background: red; */
+  /* color: var(--primary); */
+  color: black;
+  /* position: absolute;
+  top: 25px;
+  right: -20px;
+  border-radius: 50%; */
+}
+
+/* .closed .hamburguer i {
+  padding: 3px 0 0 2px;
+} */
+
+/* .hamburguer i:hover {
+  background: red;
+} */

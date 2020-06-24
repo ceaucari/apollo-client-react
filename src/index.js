@@ -13,6 +13,7 @@ import { onError } from 'apollo-link-error';
 // import { createUploadLink } from 'apollo-upload-client';
 
 import Routes from './Routes';
+import 'font-awesome/css/font-awesome.min.css';
 import 'bulma/css/bulma.css';
 import './styles/styles.css';
 // Error trying to customize bulma
