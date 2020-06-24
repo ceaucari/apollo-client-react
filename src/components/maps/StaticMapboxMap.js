@@ -19,10 +19,16 @@ const localStyles = {
   },
 };
 
+const latitude = '40.7555';
+const longitude = '-73.6899';
+const defaultLocation = { latitude, longitude };
+
 const mapboxBaseUrl =
   'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static';
 
-const StaticMapboxMap = ({ location: { latitude, longitude } }) => {
+// const StaticMapboxMap = ({ location: { latitude, longitude } }) => {
+const StaticMapboxMap = props => {
+  const { latitude, longitude } = props.location || defaultLocation;
   const mapBoxApiUri = () =>
     `${mapboxBaseUrl}/${longitude},${latitude},14,0,0/1000x600@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`;
 

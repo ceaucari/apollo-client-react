@@ -1,9 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
-// import Svg, { G, Path } from 'react-native-svg';
-
-const LocationIcon = (props) => {
+const LocationIcon = props => {
   const { height, width, fillColor, strokeColor, strokeWidth } = props;
   return (
     <svg
@@ -32,19 +29,3 @@ const LocationIcon = (props) => {
 };
 
 export default LocationIcon;
-
-// LocationIcon.defaultProps = {
-//   width: 17,
-//   height: 17,
-//   fillColor: '#009ADF',
-//   strokeColor: '#FFFFFF',
-//   strokeWidth: '30',
-// };
-
-// LocationIcon.propTypes = {
-//   width: PropTypes.number,
-//   height: PropTypes.number,
-//   fillColor: PropTypes.string,
-//   strokeColor: PropTypes.string,
-//   strokeWidth: PropTypes.string,
-// };
