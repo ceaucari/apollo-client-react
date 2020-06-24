@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import Loading from '../utils/loading';
 import Error from '../utils/error';
 import MainLayout from '../layouts/mainLayout';
@@ -8,6 +7,8 @@ import { Link, Redirect } from '@reach/router';
 import Modal from '../utils/modal';
 import UserEdit from './userEdit';
 import UserDelete from './userDelete';
+import { useEffect } from 'react';
+import { GET_USERS, GET_ME } from './graphql';
 
 const s = {
   center: {
@@ -15,37 +16,15 @@ const s = {
   },
 };
 
-const GET_ME = gql`
-  query {
-    me {
-      id
-      username
-      email
-      role
-    }
-  }
-`;
-
-const GET_USERS = gql`
-  query {
-    users {
-      id
-      username
-      email
-      role
-      createdAt
-      messages {
-        id
-        createdAt
-        text
-      }
-    }
-  }
-`;
-
 const Users = () => {
+  const [users, setUsers] = useState(null);
   const { data, loading, error } = useQuery(GET_USERS);
-  const users = data?.users;
+
+  useEffect(() => {
+    if (!users) {
+      setUsers(data?.users);
+    }
+  }, [data]);
 
   const { data: currentUser } = useQuery(GET_ME);
   const me = currentUser?.me;
@@ -59,10 +38,15 @@ const Users = () => {
     setUserId(userId);
   };
 
+  const userDeleted = () => {
+    toggleModal();
+    setUsers(users.filter(user => user.id !== userId));
+  };
+
   if (loading) return <Loading />;
   if (error) return <Error error={error} />;
 
-  if (me?.role !== 'ADMIN') {
+  if (!me || me.role !== 'ADMIN') {
     return <Redirect to="/" noThrow />;
   }
 
@@ -76,7 +60,7 @@ const Users = () => {
         {action === 'edit' ? (
           <UserEdit userId={userId} />
         ) : (
-          <UserDelete userId={userId} />
+          <UserDelete userId={userId} userDeleted={userDeleted} />
         )}
       </Modal>
       <MainLayout>

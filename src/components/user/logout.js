@@ -12,6 +12,4 @@ export default Logout;
 
 export const handleLogout = () => {
   localStorage.removeItem('token');
-  console.log('LocalStorage Token:', localStorage.getItem('token'));
-  return window.location.reload();
 };

@@ -17,36 +17,11 @@
 // export default UserFrom;
 
 import React, { useState, useEffect } from 'react';
-import { gql } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Link } from '@reach/router';
-
+import { GET_USER, SIGNUP } from './graphql';
 import Error from '../utils/error';
 import Loading from '../utils/loading';
-
-const SIGNUP = gql`
-  mutation signUp($username: String!, $email: String!, $password: String!) {
-    signUp(username: $username, email: $email, password: $password) {
-      token
-    }
-  }
-`;
-
-const GET_USER = gql`
-  query user($id: ID!) {
-    user(id: $id) {
-      id
-      username
-      email
-      role
-      messages {
-        id
-        createdAt
-        text
-      }
-    }
-  }
-`;
 
 const UserEdit = ({ userId }) => {
   const { data, loading, error } = useQuery(GET_USER, {

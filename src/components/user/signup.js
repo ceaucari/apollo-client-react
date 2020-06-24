@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
-import { gql } from '@apollo/client';
 import { useMutation } from '@apollo/react-hooks';
 import { Link } from '@reach/router';
-
+import { SIGNUP } from './graphql';
 import MainLayout from '../layouts/mainLayout';
 import Error from '../utils/error';
-
-const SIGNUP = gql`
-  mutation signUp($username: String!, $email: String!, $password: String!) {
-    signUp(username: $username, email: $email, password: $password) {
-      token
-    }
-  }
-`;
 
 const Signup = () => {
   const inp = {

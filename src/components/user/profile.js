@@ -1,31 +1,15 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import Loading from '../utils/loading';
 import Error from '../utils/error';
 import MainLayout from '../layouts/mainLayout';
+import { GET_USER } from './graphql';
 
 const s = {
   wrapper: {
     textAlign: 'left',
   },
 };
-
-const GET_USER = gql`
-  query user($id: ID!) {
-    user(id: $id) {
-      id
-      username
-      email
-      role
-      messages {
-        id
-        createdAt
-        text
-      }
-    }
-  }
-`;
 
 const Profile = ({ userId }) => {
   const { data, loading, error } = useQuery(GET_USER, {

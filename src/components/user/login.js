@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
-import { gql } from '@apollo/client';
 import { useMutation } from '@apollo/react-hooks';
 
 import Error from '../utils/error';
 import MainLayout from '../layouts/mainLayout';
 import { Link } from '@reach/router';
-
-const SIGNIN = gql`
-  mutation signIn($login: String!, $password: String!) {
-    signIn(login: $login, password: $password) {
-      token
-    }
-  }
-`;
+import { SIGNIN } from './graphql';
 
 const Login = () => {
   const inp = {
@@ -30,7 +22,6 @@ const Login = () => {
   const completed = data => {
     setInputs(inp);
     window.location = '/';
-    // navigate('/');
   };
 
   const [signIn] = useMutation(SIGNIN, {
