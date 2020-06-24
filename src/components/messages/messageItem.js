@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MessageItem = ({ message, session }) => (
-  <div className="column background-grey is-6 is-offset-3">
+  <div className="column background-grey is-full">
     <div className="columns">
       <span className="column is-size-5">{message.user.username}</span>
       <span className=" column is-size-7 has-text-right">{`${new Date(

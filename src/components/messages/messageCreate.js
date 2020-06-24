@@ -53,7 +53,7 @@ const MessageForm = () => {
     return null;
   }
   return (
-    <div className="level column is-6 is-offset-3">
+    <div className="column is-full">
       <form onSubmit={handleSubmit}>
         <div className="field">
           <textarea

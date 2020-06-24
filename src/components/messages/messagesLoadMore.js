@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LoadMore = ({ limit, pageInfo, fetchMore }) => (
-  <div className="is-2 is-offset-5 column">
+  <div className="is-4 is-offset-4 column">
     <button
       className="button is-fullwidth is-link"
       onClick={() =>
@@ -19,8 +19,8 @@ const LoadMore = ({ limit, pageInfo, fetchMore }) => (
               messages: {
                 ...fetchMoreResult.messages,
                 edges: [
-                  ...fetchMoreResult.messages.edges,
                   ...prev.messages.edges,
+                  ...fetchMoreResult.messages.edges,
                 ],
               },
             };
