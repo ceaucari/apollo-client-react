@@ -29,16 +29,17 @@ const UserMenu = () => {
 
   const hello = () => {
     // return 'Hello stranger';
-    return console.log('Hello stranger 👋🏼');
+    return console.log(`Hello ${me.username} 👋🏼`);
+  };
+
+  const help = () => {
+    console.log("Help is on it's way 🧑‍💻");
+    // alert("Help is on it's way");
   };
 
   const logout = () => {
     localStorage.removeItem('token');
     reload();
-  };
-  const help = () => {
-    console.log("Help is on it's way 🧑‍💻");
-    // alert("Help is on it's way");
   };
 
   if (!me) {
@@ -50,7 +51,10 @@ const UserMenu = () => {
         {me.username}
       </a>
       <div className="navbar-dropdown">
-        <Link to="/user" className="navbar-item has-text-dark is-arrowless">
+        <Link
+          to={`/user/${me.id}`}
+          className="navbar-item has-text-dark is-arrowless"
+        >
           Profile
         </Link>
         <Link to={reload} onClick={hello} className="navbar-item">

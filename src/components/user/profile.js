@@ -11,19 +11,27 @@ const s = {
   },
 };
 
-const GET_ME = gql`
-  query {
-    me {
+const GET_USER = gql`
+  query user($id: ID!) {
+    user(id: $id) {
       id
       username
       email
+      role
+      messages {
+        id
+        createdAt
+        text
+      }
     }
   }
 `;
 
-const Profile = () => {
-  const { data, loading, error } = useQuery(GET_ME);
-  const me = data?.me;
+const Profile = ({ userId }) => {
+  const { data, loading, error } = useQuery(GET_USER, {
+    variables: { id: userId },
+  });
+  const user = data?.user;
 
   if (loading) return <Loading />;
   if (error) return <Error error={error} />;
@@ -31,17 +39,25 @@ const Profile = () => {
 
   return (
     <MainLayout>
-      {me ? (
-        <div style={s.wrapper}>
-          <div>Id: {me.id}</div>
-          <div>Username: {me.username}</div>
-          <div>Email: {me.email}</div>
-        </div>
-      ) : (
-        <div>Unauthenticated</div>
-      )}
+      <div style={s.wrapper}>
+        <div>Id: {user.id}</div>
+        <div>Username: {user.username}</div>
+        <div>Email: {user.email}</div>
+        <div>Role: {user.role}</div>
+        <hr />
+        <h3>Messages:</h3>
+        {user.messages.map(message => (
+          <div key={message.id}>
+            <span>{`[${message.id}] - `}</span>
+            <span>{` ${new Date(message.createdAt).toLocaleString()}`}</span>
+            <div>{message.text}</div>
+          </div>
+        ))}
+      </div>
     </MainLayout>
   );
 };
 
 export default Profile;
+
+// TODO: Hide fields for other users?

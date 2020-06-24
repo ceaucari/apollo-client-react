@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './../../assets/logo.svg';
-import MainMenu from '../menu/mainMenu';
-import UserMenu from '../menu/userMenu';
-import AdminMenu from '../menu/adminMenu';
+import MainMenu from '../menus/mainMenu';
+import UserMenu from '../menus/userMenu';
+import AdminMenu from '../menus/adminMenu';
 
 const NavBar = () => {
   return (
