@@ -1,7 +1,6 @@
 import React from 'react';
 import { Router } from '@reach/router';
 import MainLayout from './components/layouts/mainLayout';
-// import Messages from './components/messages/messages';
 import MessagesPage from './components/pages/messagesPage';
 import Profile from './components/user/profile';
 import Login from './components/user/login';
@@ -19,22 +18,20 @@ const NotFound = () => (
   </MainLayout>
 );
 
-const Routes = () => {
-  return (
-    <Router>
-      <NotFound default />
-      <HomePage path="/" />
-      <MessagesPage path="/messages" />
-      <Login path="/login" />
-      <Signup path="/register" />
-      <Profile path="/user/:userId" />
-      <UserForm path="/user/edit/:userId" />
-      <Users path="/admin/users" />
-      <MapPage path="/map" />
-      <DocsPage path="/docs" />
-      <SearchPage path="/search" />
-    </Router>
-  );
-};
+const Routes = () => (
+  <Router>
+    <NotFound default />
+    <HomePage path="/" />
+    <MessagesPage path="/messages" />
+    <Login path="/login" />
+    <Signup path="/register" />
+    <Profile path="/user/:userId" />
+    <UserForm path="/user/edit/:userId" />
+    <Users path="/admin/users" />
+    <MapPage path="/map" />
+    <DocsPage path="/docs" />
+    <SearchPage path="/search" />
+  </Router>
+);
 
 export default Routes;

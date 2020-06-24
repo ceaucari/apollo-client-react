@@ -4,9 +4,27 @@ import gql from 'graphql-tag';
 import Loading from '../utils/loading';
 import Error from '../utils/error';
 import MainLayout from '../layouts/mainLayout';
-import { Link } from '@reach/router';
+import { Link, Redirect } from '@reach/router';
 import Modal from '../utils/modal';
 import UserEdit from './userEdit';
+import UserDelete from './userDelete';
+
+const s = {
+  center: {
+    textAlign: 'center',
+  },
+};
+
+const GET_ME = gql`
+  query {
+    me {
+      id
+      username
+      email
+      role
+    }
+  }
+`;
 
 const GET_USERS = gql`
   query {
@@ -15,6 +33,7 @@ const GET_USERS = gql`
       username
       email
       role
+      createdAt
       messages {
         id
         createdAt
@@ -28,7 +47,11 @@ const Users = () => {
   const { data, loading, error } = useQuery(GET_USERS);
   const users = data?.users;
 
+  const { data: currentUser } = useQuery(GET_ME);
+  const me = currentUser?.me;
+
   const [showModal, setShowModal] = useState(false);
+  const [action, setAction] = useState(null);
   const [userId, setUserId] = useState(null);
 
   const toggleModal = userId => {
@@ -38,12 +61,23 @@ const Users = () => {
 
   if (loading) return <Loading />;
   if (error) return <Error error={error} />;
-  // if (!data) return <p>Not found</p>;
+
+  if (me?.role !== 'ADMIN') {
+    return <Redirect to="/" noThrow />;
+  }
 
   return (
     <>
-      <Modal isVisible={showModal} closeModal={toggleModal} title="Edit user">
-        <UserEdit userId={userId} />
+      <Modal
+        isVisible={showModal}
+        closeModal={toggleModal}
+        title={action === 'edit' ? 'Edit user' : 'Delete user'}
+      >
+        {action === 'edit' ? (
+          <UserEdit userId={userId} />
+        ) : (
+          <UserDelete userId={userId} />
+        )}
       </Modal>
       <MainLayout>
         <table className="table">
@@ -54,6 +88,7 @@ const Users = () => {
               <th>username</th>
               <th>email</th>
               <th>role</th>
+              <th>since</th>
               <th>messages</th>
               <th>edit</th>
               <th>delete</th>
@@ -64,44 +99,47 @@ const Users = () => {
               <tr key={user.id}>
                 <td>{idx + 1}</td>
                 <td>{user.id}</td>
-                {/* <td>{user.username}</td> */}
                 <td>
                   <Link to={`/user/${user.id}`}>{user.username}</Link>
                 </td>
                 <td>{user.email}</td>
                 <td>{user.role || 'USER'}</td>
-                {/* <span>{`${new Date(user.createdAt).toLocaleString()}`}</span> */}
                 <td>
-                  {user.messages.map(message => (
-                    <div key={message.id}>
-                      <div>{message.id}</div>
-                      <div>{`${new Date(
-                        message.createdAt
-                      ).toLocaleString()}`}</div>
-                      {/* <div>{message.text}</div> */}
-                    </div>
-                  ))}{' '}
+                  <span>{`${new Date(
+                    user.createdAt
+                  ).toLocaleDateString()}`}</span>
+                </td>
+                <td style={s.center}>
+                  <Link to={`/user/${user.id}/messages`}>
+                    {user.messages.length}
+                  </Link>
                 </td>
                 <td>
                   <button
                     className="button"
-                    onClick={() => toggleModal(user.id)}
+                    onClick={() => {
+                      setAction('edit');
+                      toggleModal(user.id);
+                    }}
                   >
                     <span className="icon is-small">
                       <i className="fa fa-edit" aria-hidden="true" />
                     </span>
-                    {/* <span>Edit</span> */}
+                    <span>Edit</span>
                   </button>
                 </td>
                 <td>
                   <button
                     className="button is-danger"
-                    onClick={() => alert(`Delete user ${user.username}`)}
+                    onClick={() => {
+                      setAction('delete');
+                      toggleModal(user.id);
+                    }}
                   >
                     <span className="icon is-small">
                       <i className="fa fa-trash" aria-hidden="true" />
                     </span>
-                    {/* <span>Delete</span> */}
+                    <span>Delete</span>
                   </button>
                 </td>
               </tr>

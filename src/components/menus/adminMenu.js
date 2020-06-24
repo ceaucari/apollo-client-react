@@ -12,6 +12,7 @@ const GET_ME = gql`
       id
       username
       email
+      role
     }
   }
 `;
@@ -24,7 +25,7 @@ const AdminMenu = () => {
   if (error) return <Error error={error} />;
   if (!data) return <p>Not found</p>;
 
-  if (!me) {
+  if (me?.role !== 'ADMIN') {
     return null;
   }
   return (
