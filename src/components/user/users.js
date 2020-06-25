@@ -48,10 +48,27 @@ const Users = () => {
     setUsers(users.filter(user => user.id !== userId));
   };
 
-  if (loading) return <Loading />;
-  if (error) return <Error error={error} />;
+  if (loading) {
+    return (
+      <>
+        <MainLayout>
+          <Loading />
+        </MainLayout>
+      </>
+    );
+  }
 
-  if (!me || me.role !== 'ADMIN') {
+  if (error) {
+    return (
+      <>
+        <MainLayout>
+          <Error error={error} />
+        </MainLayout>
+      </>
+    );
+  }
+
+  if (me === null || (me && me.role !== 'ADMIN')) {
     return <Redirect to="/" noThrow />;
   }
 
@@ -69,74 +86,76 @@ const Users = () => {
         )}
       </Modal>
       <MainLayout>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>-</th>
-              <th>ID</th>
-              <th>name</th>
-              <th>username</th>
-              <th>email</th>
-              <th>role</th>
-              <th>since</th>
-              <th>messages</th>
-              <th>edit</th>
-              <th>delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users?.map((user, idx) => (
-              <tr key={user.id}>
-                <td>{idx + 1}</td>
-                <td>{user.id}</td>
-                <td>
-                  {user.firstName} {user.lastName}
-                </td>
-                <td>
-                  <Link to={`/user/${user.id}`}>{user.username}</Link>
-                </td>
-                <td>{user.email}</td>
-                <td>{user.role || 'USER'}</td>
-                <td>
-                  <span>{`${new Date(
-                    user.createdAt
-                  ).toLocaleDateString()}`}</span>
-                </td>
-                <td style={s.center}>
-                  <Link to={`/user/${user.id}`}>{user.messages.length}</Link>
-                </td>
-                <td>
-                  <button
-                    className="button"
-                    onClick={() => {
-                      setAction('edit');
-                      toggleModal(user.id);
-                    }}
-                  >
-                    <span className="icon is-small">
-                      <i className="fa fa-edit" aria-hidden="true" />
-                    </span>
-                    <span>Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className="button is-danger"
-                    onClick={() => {
-                      setAction('delete');
-                      toggleModal(user.id);
-                    }}
-                  >
-                    <span className="icon is-small">
-                      <i className="fa fa-trash" aria-hidden="true" />
-                    </span>
-                    <span>Delete</span>
-                  </button>
-                </td>
+        {me?.role === 'ADMIN' && (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>-</th>
+                <th>ID</th>
+                <th>name</th>
+                <th>username</th>
+                <th>email</th>
+                <th>role</th>
+                <th>since</th>
+                <th>messages</th>
+                <th>edit</th>
+                <th>delete</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users?.map((user, idx) => (
+                <tr key={user.id}>
+                  <td>{idx + 1}</td>
+                  <td>{user.id}</td>
+                  <td>
+                    {user.firstName} {user.lastName}
+                  </td>
+                  <td>
+                    <Link to={`/user/${user.id}`}>{user.username}</Link>
+                  </td>
+                  <td>{user.email}</td>
+                  <td>{user.role || 'USER'}</td>
+                  <td>
+                    <span>{`${new Date(
+                      user.createdAt
+                    ).toLocaleDateString()}`}</span>
+                  </td>
+                  <td style={s.center}>
+                    <Link to={`/user/${user.id}`}>{user.messages.length}</Link>
+                  </td>
+                  <td>
+                    <button
+                      className="button"
+                      onClick={() => {
+                        setAction('edit');
+                        toggleModal(user.id);
+                      }}
+                    >
+                      <span className="icon is-small">
+                        <i className="fa fa-edit" aria-hidden="true" />
+                      </span>
+                      <span>Edit</span>
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="button is-danger"
+                      onClick={() => {
+                        setAction('delete');
+                        toggleModal(user.id);
+                      }}
+                    >
+                      <span className="icon is-small">
+                        <i className="fa fa-trash" aria-hidden="true" />
+                      </span>
+                      <span>Delete</span>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </MainLayout>
     </>
   );
