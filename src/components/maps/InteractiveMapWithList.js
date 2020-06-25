@@ -141,7 +141,7 @@ const InteractiveMapWithList = () => {
     return <span style={mapStyle.controlItem} />;
   };
 
-  console.log('mapFilter:', mapFilter);
+  // console.log('mapFilter:', mapFilter);
 
   return (
     <>

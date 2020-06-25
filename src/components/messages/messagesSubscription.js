@@ -1,41 +1,39 @@
-import React from 'react';
-import { useSubscription } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import React, { Component } from 'react';
 import MessageItem from './messageItem';
+import { MSG_SUBSCRIPTION } from './graphql';
 
-const MSG_SUBSCRIPTION = gql`
-  subscription {
-    messageCreated {
-      message {
-        id
-        text
-        createdAt
-        user {
-          id
-          username
+class Subscription extends Component {
+  componentDidMount() {
+    this.subscribe();
+  }
+
+  subscribe = () => {
+    this.props.subscribeToMore({
+      document: MSG_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
         }
-      }
-    }
-  }
-`;
 
-const Subscription = () => {
-  const { data, loading } = useSubscription(MSG_SUBSCRIPTION);
+        const { messageCreated } = subscriptionData.data;
 
-  if (!data || loading) {
-    return <p>No new messages</p>;
-  }
+        return {
+          ...prev,
+          messages: {
+            ...prev.messages,
+            edges: [messageCreated.message, ...prev.messages.edges],
+          },
+        };
+      },
+    });
+  };
 
-  const {
-    messageCreated: { message },
-  } = data;
-
-  return (
-    <>
-      <h3>Last message:</h3>
+  render() {
+    const { messages } = this.props;
+    return messages.map(message => (
       <MessageItem key={message.id} message={message} />
-    </>
-  );
-};
+    ));
+  }
+}
 
 export default Subscription;

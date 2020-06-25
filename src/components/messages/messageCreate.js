@@ -1,41 +1,27 @@
 import React, { useState } from 'react';
 import { gql } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { CREATE_MESSAGE, IS_LOGGED_IN, MSG_QUERY } from './graphql';
 
 import Error from '../utils/error';
-
-const CREATE_MESSAGE = gql`
-  mutation createMessage($text: String!) {
-    createMessage(text: $text) {
-      id
-      text
-    }
-  }
-`;
-
-const IS_LOGGED_IN = gql`
-  query IsUserLoggedIn {
-    isLoggedIn @client
-  }
-`;
 
 const MessageForm = () => {
   const { data } = useQuery(IS_LOGGED_IN);
   const [input, setInput] = useState('');
 
-  const mutationUpdate = (cache, { data }) => {
-    // console.log('UPDATED data:', data);
-    // console.log('UPDATED cache:', cache);
-  };
+  // const mutationUpdate = (cache, { data }) => {
+  // console.log('UPDATED data:', data);
+  // console.log('UPDATED cache:', cache);
+  // };
 
   const mutationComplete = data => {
     setInput('');
-    // console.log('COMPLETED data:', data);
   };
 
   const [createMessage, { error }] = useMutation(CREATE_MESSAGE, {
-    update: (cache, data) => mutationUpdate(cache, data),
+    // update: (cache, data) => mutationUpdate(cache, data),
     onCompleted: data => mutationComplete(data),
+    // refetchQueries: [{ query: MSG_QUERY }],
   });
 
   const handleSubmit = event => {
@@ -46,8 +32,6 @@ const MessageForm = () => {
       );
     }
   };
-
-  console.log('isLoggedIn:', data.isLoggedIn);
 
   if (!data.isLoggedIn) {
     return null;

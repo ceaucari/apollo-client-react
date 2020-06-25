@@ -1,12 +1,12 @@
 import React from 'react';
 import MainLayout from '../layouts/mainLayout';
-import Subscription from '../messages/messagesSubscription';
+import LastMessage from '../messages/messagesLastOne';
 
 const HomePage = () => {
   return (
     <MainLayout>
       <h1>Home</h1>
-      <Subscription />
+      <LastMessage />
     </MainLayout>
   );
 };
