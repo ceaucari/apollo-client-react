@@ -10,7 +10,7 @@ const NavLink = props => (
       return {
         // style: isCurrent ? 'color: red' : 'color: blue',
         className: isCurrent
-          ? 'navbar-item has-text-dark is-active'
+          ? 'navbar-item has-text-black is-active'
           : 'navbar-item has-text-white',
       };
     }}
