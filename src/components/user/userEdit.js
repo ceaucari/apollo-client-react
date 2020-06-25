@@ -118,25 +118,13 @@ const UserEdit = ({ userId, userUpdated }) => {
       </div>
       <div className="field">
         <label className="label">Role:</label>
-        <input
-          className="input"
-          type="text"
-          placeholder="Role"
-          name="role"
-          onChange={handleInputChange}
-          value={inputs.role}
-          required
-        />
-      </div>
-      {/* <div className="field">
-        <label className="label">Role:</label>
         <div className="select is-fullwidth">
-          <select name="role">
+          <select name="role" value={inputs.role} onChange={handleInputChange}>
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
           </select>
         </div>
-      </div> */}
+      </div>
       {error && <Error error={error} />}
       <button className="button is-link is-fullwidth" type="submit">
         Save changes
