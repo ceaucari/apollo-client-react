@@ -38,10 +38,10 @@ const UserEdit = ({ userId, userUpdated }) => {
 
   useEffect(() => {
     setInputs({
-      username: user?.username,
-      firstName: user?.firstName,
-      lastName: user?.lastName,
-      role: user?.role,
+      username: user?.username || '',
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      role: user?.role || 'USER',
     });
   }, [user]);
 
