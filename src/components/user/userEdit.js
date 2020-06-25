@@ -46,6 +46,7 @@ const UserEdit = ({ userId, userUpdated }) => {
   }, [user]);
 
   const [inputs, setInputs] = useState(inp);
+  const [err, setErr] = useState();
 
   const [updateUser] = useMutation(UPDATE_USER, {
     onCompleted: userUpdated,
@@ -75,7 +76,8 @@ const UserEdit = ({ userId, userUpdated }) => {
           role: inputs.role,
         },
       }).catch(err => {
-        console.log('UNHANDLED ERR', err);
+        console.log(err);
+        setErr(err);
       });
     }
   };
@@ -125,7 +127,7 @@ const UserEdit = ({ userId, userUpdated }) => {
           </select>
         </div>
       </div>
-      {error && <Error error={error} />}
+      {err && <Error error={err} />}
       <button className="button is-link is-fullwidth" type="submit">
         Save changes
       </button>

@@ -2,10 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Link } from '@reach/router';
-
 import NavLink from './navLink';
-import Loading from '../utils/loading';
-import Error from '../utils/error';
 
 const GET_ME = gql`
   query {
@@ -18,23 +15,17 @@ const GET_ME = gql`
 `;
 
 const UserMenu = () => {
-  const { data, loading, error } = useQuery(GET_ME);
+  const { data } = useQuery(GET_ME);
   const me = data?.me;
-
-  if (loading) return <Loading />;
-  if (error) return <Error error={error} />;
-  if (!data) return <p>Not found</p>;
 
   const reload = window.location.pathname;
 
   const hello = () => {
-    // return 'Hello stranger';
     return console.log(`Hello ${me.username} 👋🏼`);
   };
 
   const help = () => {
     console.log("Help is on it's way 🧑‍💻");
-    // alert("Help is on it's way");
   };
 
   const logout = () => {

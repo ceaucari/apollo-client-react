@@ -12,7 +12,7 @@ import { GET_USERS, GET_ME } from './graphql';
 
 const s = {
   center: {
-    textAlign: 'center',
+    margin: '0 auto',
   },
 };
 
@@ -49,23 +49,11 @@ const Users = () => {
   };
 
   if (loading) {
-    return (
-      <>
-        <MainLayout>
-          <Loading />
-        </MainLayout>
-      </>
-    );
+    return <Loading />;
   }
 
   if (error) {
-    return (
-      <>
-        <MainLayout>
-          <Error error={error} />
-        </MainLayout>
-      </>
-    );
+    return <Error error={error} />;
   }
 
   if (me === null || (me && me.role !== 'ADMIN')) {
@@ -87,7 +75,7 @@ const Users = () => {
       </Modal>
       <MainLayout>
         {me?.role === 'ADMIN' && (
-          <table className="table">
+          <table className="table" style={s.center}>
             <thead>
               <tr>
                 <th>-</th>
@@ -120,7 +108,7 @@ const Users = () => {
                       user.createdAt
                     ).toLocaleDateString()}`}</span>
                   </td>
-                  <td style={s.center}>
+                  <td className="has-text-centered">
                     <Link to={`/user/${user.id}`}>{user.messages.length}</Link>
                   </td>
                   <td>

@@ -1,10 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-
 import NavLink from './navLink';
-import Loading from '../utils/loading';
-import Error from '../utils/error';
 
 const GET_ME = gql`
   query {
@@ -18,16 +15,13 @@ const GET_ME = gql`
 `;
 
 const AdminMenu = () => {
-  const { data, loading, error } = useQuery(GET_ME);
+  const { data } = useQuery(GET_ME);
   const me = data?.me;
-
-  if (loading) return <Loading />;
-  if (error) return <Error error={error} />;
-  if (!data) return <p>Not found</p>;
 
   if (me?.role !== 'ADMIN') {
     return null;
   }
+
   return (
     <>
       <NavLink className="navbar-item" to="/admin/users">

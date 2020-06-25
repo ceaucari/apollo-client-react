@@ -48,7 +48,7 @@ const Signup = () => {
           password: inputs.password,
         },
       }).catch(err => {
-        console.log('UNHANDLED ERR', err);
+        console.log(err);
         setError(err);
       });
     }
