@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 
 const DocsSidebarCollapsible = props => {
   const [open, setOpen] = useState(true);

@@ -47,6 +47,7 @@ const UserMenu = () => {
   }
   return (
     <div className="navbar-item has-dropdown is-hoverable">
+      {/* eslint-disable-next-line  */}
       <a className="navbar-link has-text-grey-light is-arrowless">
         {me.username}
       </a>

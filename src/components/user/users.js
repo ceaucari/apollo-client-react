@@ -24,7 +24,7 @@ const Users = () => {
     if (!users) {
       setUsers(data?.users);
     }
-  }, [data]);
+  }, [data, users]);
 
   const { data: currentUser } = useQuery(GET_ME);
   const me = currentUser?.me;
@@ -94,9 +94,7 @@ const Users = () => {
                   ).toLocaleDateString()}`}</span>
                 </td>
                 <td style={s.center}>
-                  <Link to={`/user/${user.id}/messages`}>
-                    {user.messages.length}
-                  </Link>
+                  <Link to={`/user/${user.id}`}>{user.messages.length}</Link>
                 </td>
                 <td>
                   <button

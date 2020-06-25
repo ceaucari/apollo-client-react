@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { gql } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { CREATE_MESSAGE, IS_LOGGED_IN, MSG_QUERY } from './graphql';
+import { CREATE_MESSAGE, IS_LOGGED_IN } from './graphql';
 
 import Error from '../utils/error';
 
@@ -21,7 +20,6 @@ const MessageForm = () => {
   const [createMessage, { error }] = useMutation(CREATE_MESSAGE, {
     // update: (cache, data) => mutationUpdate(cache, data),
     onCompleted: data => mutationComplete(data),
-    // refetchQueries: [{ query: MSG_QUERY }],
   });
 
   const handleSubmit = event => {

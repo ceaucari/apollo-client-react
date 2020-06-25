@@ -1,8 +1,7 @@
 import React from 'react';
 import './docs.css';
-import Collapsible from '../utils/collapsible';
 import DocsSidebarCollapsible from './docsSidebarCollapsible';
-import DocsTopNav from './docsTopNav';
+// import DocsTopNav from './docsTopNav';
 import RightSideBar from './rightSideBar';
 
 const Docs = props => (
@@ -39,6 +38,7 @@ const SideBarContent = () => {
   return (
     <ul>
       <li>
+        {/* eslint-disable-next-line  */}
         <a href="#">
           {/* <span className="icon">
             <i className="fa fa-book" aria-hidden="true"></i>
@@ -47,6 +47,7 @@ const SideBarContent = () => {
         </a>
       </li>
       <li>
+        {/* eslint-disable-next-line  */}
         <a href="#">
           {/* <span className="icon">
             <i className="fa fa-file-video" aria-hidden="true"></i>

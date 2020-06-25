@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import loadGoogleMapsApi from 'load-google-maps-api';
-import Toggle from '../utils/toggle/Toggle';
+// import Toggle from '../utils/toggle/Toggle';
 import 'dotenv/config';
 
 const mapStyle = {

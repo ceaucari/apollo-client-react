@@ -39,26 +39,24 @@ const s = {
   },
 };
 
-const MessagesPage = () => {
-  return (
-    <>
-      <NavBar />
-      <div style={s.wrapper}>
-        <div style={s.sidebarLeft}>
-          <ChatUsers />
-        </div>
-        <div style={s.messagesWrapper}>
-          <div style={s.messageForm}>
-            <MessageForm />
-          </div>
-          <div style={s.messages}>
-            <Messages />
-          </div>
-        </div>
-        <div style={s.sidebarRight}></div>
+const MessagesPage = () => (
+  <>
+    <NavBar />
+    <div style={s.wrapper}>
+      <div style={s.sidebarLeft}>
+        <ChatUsers />
       </div>
-    </>
-  );
-};
+      <div style={s.messagesWrapper}>
+        <div style={s.messageForm}>
+          <MessageForm />
+        </div>
+        <div style={s.messages}>
+          <Messages />
+        </div>
+      </div>
+      <div style={s.sidebarRight}></div>
+    </div>
+  </>
+);
 
 export default MessagesPage;

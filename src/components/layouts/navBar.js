@@ -22,7 +22,7 @@ const NavBar = () => {
           <a className="navbar-item" href="/">
             <img className="logo" src={logo} alt="logo" />
           </a>
-
+          {/* eslint-disable-next-line */}
           <a
             onClick={toggle}
             role="button"

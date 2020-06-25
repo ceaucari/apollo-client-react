@@ -18,7 +18,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { Link } from '@reach/router';
+// import { Link } from '@reach/router';
 import { GET_USER, SIGNUP } from './graphql';
 import Error from '../utils/error';
 import Loading from '../utils/loading';
@@ -29,7 +29,7 @@ const UserEdit = ({ userId }) => {
   });
 
   const user = data?.user;
-  const [userData, setUserData] = useState();
+  // const [userData, setUserData] = useState();
 
   // const inp = {
   //   name: '',
@@ -51,7 +51,6 @@ const UserEdit = ({ userId }) => {
   }, [user]);
 
   const [inputs, setInputs] = useState(inp);
-  const [err, setErr] = useState();
 
   // const updateCache = (cache, { data }) => {
   //   localStorage.setItem('token', data.signUp.token);
@@ -91,7 +90,6 @@ const UserEdit = ({ userId }) => {
         },
       }).catch(err => {
         console.log('UNHANDLED ERR', err);
-        setErr(err);
       });
     }
   };

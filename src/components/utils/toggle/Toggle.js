@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './toggle.css';
 
 const Toggle = ({ isOff }) => {
-  // const [off, setOff] = useState(isOff);
+  const [off, setOff] = useState(isOff);
 
-  // useEffect(() => {
-  //   setOff(!off);
-  //   // return () => {
-  //   //   cleanup
-  //   // }
-  // }, [props.onClick]);
+  useEffect(() => {
+    setOff(!off);
+    // return () => {
+    //   cleanup
+    // }
+  }, [off]);
 
   // const toggle = () => {
-  //   setOn(!on);
+  //   setOff(!off);
   // };
 
   return (

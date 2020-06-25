@@ -104,7 +104,7 @@ const LastMessage = ({ limit = LIMIT }) => {
   }
 
   const {
-    messages: { edges, pageInfo },
+    messages: { edges },
   } = data;
 
   return (
