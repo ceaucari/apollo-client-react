@@ -26,8 +26,13 @@ const Profile = ({ userId }) => {
       <div style={s.wrapper}>
         <div>Id: {user.id}</div>
         <div>Username: {user.username}</div>
+        <div>First name: {user.firstName}</div>
+        <div>Last name: {user.lastName}</div>
         <div>Email: {user.email}</div>
         <div>Role: {user.role}</div>
+        <div>
+          Member since: {` ${new Date(user.createdAt).toLocaleDateString()}`}
+        </div>
         <hr />
         <h3>Messages:</h3>
         {user.messages.map(message => (

@@ -38,6 +38,11 @@ const Users = () => {
     setUserId(userId);
   };
 
+  const userUpdated = () => {
+    toggleModal();
+    setUsers(null);
+  };
+
   const userDeleted = () => {
     toggleModal();
     setUsers(users.filter(user => user.id !== userId));
@@ -58,7 +63,7 @@ const Users = () => {
         title={action === 'edit' ? 'Edit user' : 'Delete user'}
       >
         {action === 'edit' ? (
-          <UserEdit userId={userId} />
+          <UserEdit userId={userId} userUpdated={userUpdated} />
         ) : (
           <UserDelete userId={userId} userDeleted={userDeleted} />
         )}
@@ -69,6 +74,7 @@ const Users = () => {
             <tr>
               <th>-</th>
               <th>ID</th>
+              <th>name</th>
               <th>username</th>
               <th>email</th>
               <th>role</th>
@@ -83,6 +89,9 @@ const Users = () => {
               <tr key={user.id}>
                 <td>{idx + 1}</td>
                 <td>{user.id}</td>
+                <td>
+                  {user.firstName} {user.lastName}
+                </td>
                 <td>
                   <Link to={`/user/${user.id}`}>{user.username}</Link>
                 </td>

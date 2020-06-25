@@ -5,6 +5,8 @@ export const GET_USERS = gql`
     users {
       id
       username
+      firstName
+      lastName
       email
       role
       createdAt
@@ -22,8 +24,11 @@ export const GET_USER = gql`
     user(id: $id) {
       id
       username
+      firstName
+      lastName
       email
       role
+      createdAt
       messages {
         id
         createdAt
@@ -63,5 +68,31 @@ export const SIGNIN = gql`
 export const DELETE_USER = gql`
   mutation deleteUser($id: ID!) {
     deleteUser(id: $id)
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation updateUser(
+    $id: ID!
+    $username: String!
+    $firstName: String
+    $lastName: String
+    $role: String!
+  ) {
+    updateUser(
+      id: $id
+      username: $username
+      firstName: $firstName
+      lastName: $lastName
+      role: $role
+    ) {
+      id
+      username
+      firstName
+      lastName
+      email
+      role
+      createdAt
+    }
   }
 `;

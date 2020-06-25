@@ -18,53 +18,37 @@
 
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-// import { Link } from '@reach/router';
-import { GET_USER, SIGNUP } from './graphql';
+import { GET_USER, UPDATE_USER } from './graphql';
 import Error from '../utils/error';
 import Loading from '../utils/loading';
 
-const UserEdit = ({ userId }) => {
+const UserEdit = ({ userId, userUpdated }) => {
   const { data, loading, error } = useQuery(GET_USER, {
     variables: { id: userId },
   });
 
   const user = data?.user;
-  // const [userData, setUserData] = useState();
 
-  // const inp = {
-  //   name: '',
-  //   email: '',
-  //   role: '',
-  // };
   const inp = {
-    name: user?.username,
-    email: user?.email,
+    username: user?.username,
+    firstName: user?.firstName,
+    lastName: user?.lastName,
     role: user?.role,
   };
 
   useEffect(() => {
     setInputs({
-      name: user?.username,
-      email: user?.email,
+      username: user?.username,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
       role: user?.role,
     });
   }, [user]);
 
   const [inputs, setInputs] = useState(inp);
 
-  // const updateCache = (cache, { data }) => {
-  //   localStorage.setItem('token', data.signUp.token);
-  // };
-
-  const completed = data => {
-    setInputs(inp);
-    // Redirect to user profile??
-    // Reload Users page?
-  };
-
-  const [signup] = useMutation(SIGNUP, {
-    // update: updateCache,
-    onCompleted: data => completed(data),
+  const [updateUser] = useMutation(UPDATE_USER, {
+    onCompleted: userUpdated,
   });
 
   if (loading) return <Loading />;
@@ -82,11 +66,13 @@ const UserEdit = ({ userId }) => {
   const handleSubmit = event => {
     if (event) {
       event.preventDefault();
-      signup({
+      updateUser({
         variables: {
-          username: inputs.name,
-          email: inputs.email,
-          password: inputs.password,
+          id: userId,
+          username: inputs.username,
+          firstName: inputs.firstName,
+          lastName: inputs.lastName,
+          role: inputs.role,
         },
       }).catch(err => {
         console.log('UNHANDLED ERR', err);
@@ -95,30 +81,39 @@ const UserEdit = ({ userId }) => {
   };
 
   return (
-    // <div className="level column is-4 is-offset-4">
     <form onSubmit={handleSubmit}>
       <div className="field">
-        <label className="label">Name:</label>
+        <label className="label">User name:</label>
         <input
           className="input"
           type="text"
           placeholder="Username"
-          name="name"
+          name="username"
           onChange={handleInputChange}
-          value={inputs.name}
+          value={inputs.username}
           required
         />
       </div>
       <div className="field">
-        <label className="label">Email:</label>
+        <label className="label">First name:</label>
         <input
           className="input"
-          type="email"
-          placeholder="Email"
-          name="email"
+          type="text"
+          placeholder="First name"
+          name="firstName"
           onChange={handleInputChange}
-          value={inputs.email}
-          required
+          value={inputs.firstName}
+        />
+      </div>
+      <div className="field">
+        <label className="label">Last name:</label>
+        <input
+          className="input"
+          type="text"
+          placeholder="Last name"
+          name="lastName"
+          onChange={handleInputChange}
+          value={inputs.lastName}
         />
       </div>
       <div className="field">
@@ -133,12 +128,20 @@ const UserEdit = ({ userId }) => {
           required
         />
       </div>
+      {/* <div className="field">
+        <label className="label">Role:</label>
+        <div className="select is-fullwidth">
+          <select name="role">
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+          </select>
+        </div>
+      </div> */}
       {error && <Error error={error} />}
       <button className="button is-link is-fullwidth" type="submit">
         Save changes
       </button>
     </form>
-    // </div>
   );
 };
 
