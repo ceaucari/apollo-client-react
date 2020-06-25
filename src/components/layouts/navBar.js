@@ -37,7 +37,10 @@ const NavBar = () => {
           </a>
         </div>
 
-        <div id="navbarTarget" className="navbar-menu">
+        <div
+          id="navbarTarget"
+          className={`navbar-menu ${active && 'is-active has-background-info'}`}
+        >
           <div className="navbar-start">
             <MainMenu />
           </div>
