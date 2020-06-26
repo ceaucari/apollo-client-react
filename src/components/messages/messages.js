@@ -6,7 +6,7 @@ import Subscription from './messagesSubscription';
 import LoadMore from './messagesLoadMore';
 import { MSG_QUERY } from './graphql';
 
-const LIMIT = 2;
+export const LIMIT = 2;
 
 const Messages = ({ limit = LIMIT }) => {
   const { data, loading, error, fetchMore, subscribeToMore } = useQuery(

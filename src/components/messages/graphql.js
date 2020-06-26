@@ -50,3 +50,9 @@ export const MSG_SUBSCRIPTION = gql`
     }
   }
 `;
+
+export const DELETE_MESSAGE = gql`
+  mutation deleteMessage($id: ID!) {
+    deleteMessage(id: $id)
+  }
+`;
