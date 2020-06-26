@@ -3,21 +3,24 @@ import { useMutation } from '@apollo/react-hooks';
 import { DELETE_MESSAGE, MSG_QUERY } from './graphql';
 import { LIMIT } from './messages';
 
-const DeleteMessage = ({ messageId, messageDeleted }) => {
+const DeleteMessage = ({
+  messageId,
+  // messageDeleted,
+}) => {
   const [deleteMessage] = useMutation(DELETE_MESSAGE, {
     refetchQueries: [
       { query: MSG_QUERY, variables: { cursor: '', limit: LIMIT } },
     ],
-    onCompleted: messageDeleted,
+    // onCompleted: messageDeleted,
   });
 
   const handleDeleteMessage = messageId => {
-    console.log('MSG', messageId);
     deleteMessage({
       variables: { id: messageId },
     }).catch(err => {
       console.log(err);
     });
+    // console.log('Message deleted id:', messageId);
   };
 
   return (
@@ -33,3 +36,5 @@ const DeleteMessage = ({ messageId, messageDeleted }) => {
 };
 
 export default DeleteMessage;
+
+// TODO: Use "useContext" to trigger a modal to confirm de message deletion
