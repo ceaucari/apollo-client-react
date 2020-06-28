@@ -72,24 +72,46 @@ const InteractiveMapWithList = () => {
       key: process.env.REACT_APP_GOOGLEMAPS_KEY,
     })
       .then(googleMaps => {
-        const gMap = new googleMaps.Map(document.getElementById('map'), {
-          center: {
-            lat: -28.024,
-            lng: 140.887,
-          },
+        const initialPosition = { lat: -25.363, lng: 131.044 };
+
+        const map = new googleMaps.Map(document.getElementById('map'), {
+          center: initialPosition,
           zoom: 4,
         });
+
         const markers = locations.map((location, i) => {
           return new googleMaps.Marker({
             position: location.position,
             label: location.name,
-            map: gMap,
+            map: map,
           });
         });
+
+        // // Create the initial InfoWindow.
+        // let infoWindow = new googleMaps.InfoWindow({
+        //   content: 'Click the map to get Lat/Lng!',
+        //   position: initialPosition,
+        // });
+        // infoWindow.open(map);
+
+        // // Configure the click listener.
+        // map.addListener('click', mapsMouseEvent => {
+        //   // Close the current InfoWindow.
+        //   infoWindow.close();
+
+        //   // Create a new InfoWindow.
+        //   infoWindow = new googleMaps.InfoWindow({
+        //     position: mapsMouseEvent.latLng,
+        //   });
+        //   infoWindow.setContent(mapsMouseEvent.latLng.toString());
+        //   infoWindow.open(map);
+        // });
+
+        // Filter results on map move
         if (mapFilter) {
-          gMap.addListener('bounds_changed', () => {
+          map.addListener('bounds_changed', () => {
             const filtered = markers.filter(marker =>
-              gMap.getBounds().contains(marker.getPosition())
+              map.getBounds().contains(marker.getPosition())
             );
             setResult(filtered);
           });

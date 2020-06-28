@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from './navBar';
 
-const MainLayout = (props) => (
+const MainLayout = props => (
   <>
     <NavBar />
     <section className="section">
