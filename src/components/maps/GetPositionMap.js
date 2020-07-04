@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import loadGoogleMapsApi from 'load-google-maps-api';
 import 'dotenv/config';
-import NavBar from '../layouts/navBar';
 
 const mapStyle = {
   width: 'auto',
@@ -10,7 +9,7 @@ const mapStyle = {
 
 export let result = [];
 
-const GetPositionMap = ({ coords }) => {
+const GetPositionMap = ({ initialPosition, newPosition }) => {
   useEffect(() => {
     gMap();
   }, []);
@@ -20,11 +19,8 @@ const GetPositionMap = ({ coords }) => {
       key: process.env.REACT_APP_GOOGLEMAPS_KEY,
     })
       .then(googleMaps => {
-        // Set initial values
-        const initialPosition = { lat: -25.363, lng: 131.044 };
-
         const map = new googleMaps.Map(document.getElementById('map'), {
-          zoom: 4,
+          zoom: 16,
           center: initialPosition,
         });
 
@@ -36,13 +32,13 @@ const GetPositionMap = ({ coords }) => {
         });
         let lat = initialPosition.lat;
         let lon = initialPosition.lng;
-        coords(lat, lon);
+        newPosition(lat, lon);
 
         // Handle drag marker
         marker.addListener('dragend', mapsMarkerEvent => {
           lat = mapsMarkerEvent.latLng.lat();
           lon = mapsMarkerEvent.latLng.lng();
-          coords(lat, lon);
+          newPosition(lat, lon);
         });
 
         // Configure the click listener.
@@ -57,13 +53,13 @@ const GetPositionMap = ({ coords }) => {
           });
           lat = e.latLng.lat();
           lon = e.latLng.lng();
-          coords(lat, lon);
+          newPosition(lat, lon);
 
           // Handle drag marker after click event
           marker.addListener('dragend', e => {
             lat = e.latLng.lat();
             lon = e.latLng.lng();
-            coords(lat, lon);
+            newPosition(lat, lon);
           });
         });
       })
@@ -75,22 +71,3 @@ const GetPositionMap = ({ coords }) => {
 };
 
 export default GetPositionMap;
-
-// const AddLocation = () => {
-//   const [position, setPosition] = useState({});
-
-//   const getPosition = (lat, lon) => {
-//     setPosition({ lat, lon });
-//   };
-
-//   return (
-//     <>
-//       <NavBar />
-//       <AddLocationMap coords={getPosition} />
-//       <div>{`Lat: ${position.lat}`}</div>
-//       <div>{`Lon: ${position.lon}`}</div>
-//     </>
-//   );
-// };
-
-// export default AddLocation;
